@@ -68,8 +68,14 @@ public class Hora {
         }
         
     }
-
-	public boolean estaPresente(ArrayList<Horario> horarios) {
+     /**
+     * Verifica se esta hora esta presente em um ArrayList de horarios
+     * @param horarios
+     *	ArrayList do qual sera feita a verificacao
+     * @return
+     *	true, se a hora estiver presente nesses horarios, ou false, caso nao esteja
+     */
+     public boolean estaPresente(ArrayList<Horario> horarios) {
 		for(Horario h: horarios) {
 			if(h.contem(this)) {
 				return true;
