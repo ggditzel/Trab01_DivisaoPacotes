@@ -7,12 +7,12 @@ import br.ufsc.ine5605.funcionario.ControladorFuncionario;
 import br.ufsc.ine5605.funcionario.Funcionario;
 import br.ufsc.ine5605.horario.ControladorHorario;
 import br.ufsc.ine5605.horario.Hora;
-//TODO
-//javadoc
+
+
 public class ControladorTentativaAcesso {
 	private TelaTentativaAcesso tela;
 	private ArrayList<TentativaAcesso> tentativas;
-    private static ControladorTentativaAcesso instancia;
+	private static ControladorTentativaAcesso instancia;
     
     private ControladorTentativaAcesso() {
     	tentativas = new ArrayList<>();
@@ -24,7 +24,9 @@ public class ControladorTentativaAcesso {
     	}
     	return instancia;
     }
-	
+	/**
+	* Realiza uma tentativa de acesso, fazendo a validacao do acesso
+	*/
 	public void iniciaTentativa() { 
 		int opcao = tela.mostraOpcoes();
 		String data;
@@ -63,18 +65,13 @@ public class ControladorTentativaAcesso {
 			tela.confirmaAcesso();
 		}
 	}
-	
+	/**
+	* Chama a tela relacionada ao menu de tentativas e direciona de acordo com a resposta do usuario
+	*/
 	public void menuRelatorioTentativas(){
 		int opcao = tela.mostraMenuTentativas();
 		switch(opcao){
-		/*		"1- Listar todas as tentativas de acesso\n" +
-				"2- Listar todas as tentativas de acesso negadas\n" +
-				"3- Listar todos os acessos\n" +
-				"4- Listar todos as tentativas de acesso a partir de uma matricula" +
-				"5- Listar tentativas de acesso negadas a partir de uma matricula\n" +
-				"6- Listar os acessos a partir de uma matricula\n" +
-				"7- Listar tentativas de acesso negadas por um motivo\n" +
-				"0- Voltar"*/
+				
 			case 0:
 				break;
 			case 1:
@@ -101,7 +98,7 @@ public class ControladorTentativaAcesso {
 			case 7:
 				int valorMotivo = tela.perguntaMotivo();
 				if(valorMotivo == 0) break;
-				MotivoNegacaoAcesso motivo = valorMotivo == 1 ? MotivoNegacaoAcesso.ACESSO_BLOQUEADO : valorMotivo == 2 ? MotivoNegacaoAcesso.HORARIO_NAO_PERMITIDO : valorMotivo == 3 ? MotivoNegacaoAcesso.MATRICULA_INEXISTENTE : MotivoNegacaoAcesso.NAO_POSSUI_ACESSO; // posso usar switch aqui
+				MotivoNegacaoAcesso motivo = valorMotivo == 1 ? MotivoNegacaoAcesso.ACESSO_BLOQUEADO : valorMotivo == 2 ? MotivoNegacaoAcesso.HORARIO_NAO_PERMITIDO : valorMotivo == 3 ? MotivoNegacaoAcesso.MATRICULA_INEXISTENTE : MotivoNegacaoAcesso.NAO_POSSUI_ACESSO;
 				tela.listaTentativas(findTentativasNegadasByMotivo(motivo));
 				break;
 		}
@@ -128,7 +125,13 @@ public class ControladorTentativaAcesso {
 		}
 		return acessos;
 	}
-	
+	/**
+	* Encontra todas as tentativas de acesso de uma matricula
+	* @param matricula
+	*	Matricula que sera usada para encontrar as tentativas
+	* @return
+	*	null, caso nao ha tentativas com essa matricula, ou um ArrayList com todas as tentativas da matricula
+	*/
 	public ArrayList<TentativaAcesso> findTentativasByMatricula(int matricula) {
 		ArrayList<TentativaAcesso> tentativasDaMatricula = new ArrayList<>();
 		for(TentativaAcesso t: tentativas) {
@@ -138,7 +141,13 @@ public class ControladorTentativaAcesso {
 		}
 		return tentativasDaMatricula;
 	}
-	
+	/**
+	* Encontra todas as tentativas de acesso negadas de uma matricula
+	* @param matricula
+	*	Matricula que sera usada para encontrar as tentativas
+	* @return
+	*	null, caso nao ha tentativas negadas com essa matricula, ou um ArrayList com todas as tentativas negadas da matricula
+	*/
 	public ArrayList<TentativaAcesso> findTentativasNegadasByMatricula(int matricula) {
 		ArrayList<TentativaAcesso> tentativasDaMatricula = new ArrayList<>();
 		for(TentativaAcesso t: findTentativasByMatricula(matricula)) {
@@ -148,7 +157,13 @@ public class ControladorTentativaAcesso {
 		}
 		return tentativasDaMatricula;
 	}
-	
+	/**
+	* Encontra todos os acesso de uma matricula
+	* @param matricula
+	*	Matricula que sera usada para encontrar os acessos
+	* @return
+	*	null, caso nao ha acesso com essa matricula, ou um ArrayList com todas os acessos da matricula
+	*/
 	public ArrayList<TentativaAcesso> findAcessosByMatricula(int matricula) {
 		ArrayList<TentativaAcesso> acessosDaMatricula = new ArrayList<>();
 		for(TentativaAcesso t: findTentativasByMatricula(matricula)) {
@@ -158,7 +173,13 @@ public class ControladorTentativaAcesso {
 		}
 		return acessosDaMatricula;
 	}
-	
+	/**
+	* Encontra todas as tentativas de acesso negadas por um motivo
+	* @param motivo
+	*	Motivo que sera usada para encontrar as tentativas negadas
+	* @return
+	*	null, caso nao ha tentativas por esse motivo, ou um ArrayList com todas as tentativas negadas pelo motivo
+	*/
 	public ArrayList<TentativaAcesso> findTentativasNegadasByMotivo(MotivoNegacaoAcesso motivo) {
 		ArrayList<TentativaAcesso> tentativasDoMotivo = new ArrayList<>();
 		for(TentativaAcesso t: tentativas) {
