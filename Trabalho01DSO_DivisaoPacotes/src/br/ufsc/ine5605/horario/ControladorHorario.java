@@ -164,7 +164,11 @@ public class ControladorHorario {
     		}	
     	}while(true);
     }
-    
+    /**
+    * Direciona as operacoes para editar os horarios de um cargo, podendo adicionar horarios ou remove-los
+    * @param cargo
+    *	Cargo o qual cujos horarios sofrerao alteracao
+    */
     public void editaHorariosCargo(ICargo cargo){
     	int opcao = tela.mostraOpcoesEditar();
     	switch(opcao){
@@ -179,20 +183,21 @@ public class ControladorHorario {
     	}
     }
     
-//TODO
-    //javadoc
+    /**
+    * Solicita para a tela mostrar a lista de um cargo
+    * @param cargo
+    *	Cargo cuja lista de horario sera mostrada
+    */
     public void listaHorarios(ICargo cargo){
     	tela.mostraLista(cargo.getHorariosPermitidos());
     }
     
-    //TODO
-    //javadoc incompleto
     /**
      * Faz a diferenca de 2 ArrayLists  
      * @param lista1
      * 	lista da qual sera tirada a diferenca
      * @param lista2
-     * 	lista que tira
+     * 	lista que tirara a diferenca
      * @return
      *	ArrayList que possui os elementos que pertencem a lista1 mas nao pertencem a lista2
      */
@@ -222,9 +227,13 @@ public class ControladorHorario {
     	}
     	return false;
     }
-    
-    //talvez precise usar o metodo possuiHorario
-    //nao testado ainda
+    /**
+    * Verifica se um horario cadastrado esta em uso, se pertence a algum cargo
+    * @param horario
+    *	Horario que sera verificado
+    * @return
+    *	true, se o horario estiver sendo utilizado por algum cargo, ou false, se nao estiver
+    */
     private boolean horarioEhUtilizado(Horario horario){
     	for(Cargo c: ControladorCargo.getInstance().getListaCargos()) {
     		if(c.getHorariosPermitidos().contains(horario)){
@@ -233,7 +242,14 @@ public class ControladorHorario {
     	}
     	return false;
     }
-	public static Hora converte(String hora) {
+     /**
+     * Converte um String no formato hh:mm em uma Hora
+     * @param hora
+     *	String que sera convertido
+     * @return
+     *	Hora referente ao String do parametro
+     */
+     public static Hora converte(String hora) {
 		return new Hora(Integer.parseInt(hora.substring(0,2)), Integer.parseInt(hora.substring(3)));
 	}
     
