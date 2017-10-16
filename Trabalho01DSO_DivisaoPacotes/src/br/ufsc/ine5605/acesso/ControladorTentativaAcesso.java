@@ -130,7 +130,7 @@ public class ControladorTentativaAcesso {
 	* @param matricula
 	*	Matricula que sera usada para encontrar as tentativas
 	* @return
-	*	null, caso nao ha tentativas com essa matricula, ou um ArrayList com todas as tentativas da matricula
+	*	ArrayList com todas as tentativas da matricula
 	*/
 	public ArrayList<TentativaAcesso> findTentativasByMatricula(int matricula) {
 		ArrayList<TentativaAcesso> tentativasDaMatricula = new ArrayList<>();
@@ -146,7 +146,7 @@ public class ControladorTentativaAcesso {
 	* @param matricula
 	*	Matricula que sera usada para encontrar as tentativas
 	* @return
-	*	null, caso nao ha tentativas negadas com essa matricula, ou um ArrayList com todas as tentativas negadas da matricula
+	*	ArrayList com todas as tentativas negadas da matricula
 	*/
 	public ArrayList<TentativaAcesso> findTentativasNegadasByMatricula(int matricula) {
 		ArrayList<TentativaAcesso> tentativasDaMatricula = new ArrayList<>();
@@ -162,7 +162,7 @@ public class ControladorTentativaAcesso {
 	* @param matricula
 	*	Matricula que sera usada para encontrar os acessos
 	* @return
-	*	null, caso nao ha acesso com essa matricula, ou um ArrayList com todas os acessos da matricula
+	*	ArrayList com todas os acessos da matricula
 	*/
 	public ArrayList<TentativaAcesso> findAcessosByMatricula(int matricula) {
 		ArrayList<TentativaAcesso> acessosDaMatricula = new ArrayList<>();
@@ -178,7 +178,7 @@ public class ControladorTentativaAcesso {
 	* @param motivo
 	*	Motivo que sera usada para encontrar as tentativas negadas
 	* @return
-	*	null, caso nao ha tentativas por esse motivo, ou um ArrayList com todas as tentativas negadas pelo motivo
+	*	ArrayList com todas as tentativas negadas pelo motivo
 	*/
 	public ArrayList<TentativaAcesso> findTentativasNegadasByMotivo(MotivoNegacaoAcesso motivo) {
 		ArrayList<TentativaAcesso> tentativasDoMotivo = new ArrayList<>();
