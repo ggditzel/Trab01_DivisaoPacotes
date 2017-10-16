@@ -7,7 +7,14 @@ import br.ufsc.ine5605.cargo.ControladorCargo;
 
 public class TelaFuncionario extends Tela {
 
-	public DadosCadastroFuncionario IncluirFuncionario() {
+	/**
+	 * Recebe String para ser listada ao chamar o metodo pedeCargo, solicita via Scanner os dados necessarios para o cadastro de um novo
+	 * Funcionario, podendo cadastrar também um novo cargo, retornando as informacoes em uma classe temporaria a ser
+	 * utilizada pelo ControladorFuncionario
+	 * 
+	 * @return DadosCadastroFuncionario(int matricula,String nome,Cargo cargo,String telefone,String dataNascimento,int  salario)
+	 */
+	public DadosCadastroFuncionario IncluirFuncionario(String listaC) {
 			int matricula = -1;
 			String nome;
 			Cargo cargo;
@@ -18,17 +25,10 @@ public class TelaFuncionario extends Tela {
 			mostraMensagem("==== Digite os dados solicitados ====");
 			matricula = pedeMatricula();
 			nome = pedeNome();
-			
-			perguntarCriarCargo();
-			if(ControladorCargo.getInstance().getListaCargos().size() ==0) {
-				mostraMensagem("Ainda ão ha um cargo cadastrado, iniciando criação de novo cargo");
-				ControladorCargo.getInstance().incluirCargo();
-				
-			}
-			cargo = pedeCargo();
+			cargo = pedeCargo(listaC);
 			
 			
-			
+
 			
 			
 			mostraMensagem("Digite o telefone do funcionario(Apenas numeros)");
@@ -67,35 +67,15 @@ public class TelaFuncionario extends Tela {
 
 }
 
-	private void perguntarCriarCargo()  {
-		mostraMensagem("Deseja criar um novo cargo agora?(S/N)");
-		boolean eaee = false;
-		do {
-			String resposta =leitor.nextLine();
-		
-			try {
-				if(super.verificaSN(resposta)) {
-					ControladorCargo.getInstance().incluirCargo();
-					eaee = true;
-				}
-				else {
-					eaee = true;
-					
-				}
-			} catch (Exception e) {
-				mostraMensagem("Digite apenas 's' ou 'n'");
-				eaee = false;
-			}
-		}while (!eaee);
-			
-			
-	}
-	
-	private Cargo pedeCargo() {
+
+	/*
+	 * lista os cargos cadastrados com horarios de acesso, pede e valida o codigo de cargo existente
+	 */
+	private Cargo pedeCargo(String listaC) {
 		boolean eae = false;
 		Cargo cargotemp = null;
 		
-		ControladorFuncionario.getInstance().printaListaCargoNomeCodigoHorario();
+		mostraMensagem(listaC);
 		
 	 mostraMensagem("Digite o codigo de um dos cargos da lista");
 	 do{
@@ -119,7 +99,9 @@ public class TelaFuncionario extends Tela {
 	public void mostraMensagem(String mensagem) {
 		System.out.println(mensagem);
 	}
-	
+	/*
+	 * pede via console e valida a matricula
+	 */
 	public int pedeMatricula() {
 		boolean eae = false;
 		int matricula = 0;
@@ -135,6 +117,9 @@ public class TelaFuncionario extends Tela {
 		return matricula;
 	
 }
+	/*
+	 * pede via console e valida o nome, verificar classe RegrasValidacao
+	 */
 	public String pedeNome() {
 		boolean eae = false;
 		String nome = "";
@@ -151,6 +136,33 @@ public class TelaFuncionario extends Tela {
 		}while (!eae);
 		return nome;
 	}
-
+	/**
+	 * recebe um int e printa que ela não foi encontrada
+	 * @param a
+	 */
+	public void mensagemNexisteMat(int a){
+		System.out.println("-Funcionario de matricula '"+ a + "'nao encontrado, tente novamente-");
+	}
+	
+	/*
+	 * Printa "Funcionario de matricula '"+a+"'Selecionado para operação"
+	 * a = int
+	 */
+	public void printaNumMatOk(int a) {
+		System.out.println("Funcionario de matricula '"+a+"'Selecionado para operação");
+	}
+	/*
+	 * Printa("Matricula não cadastrada, tente novamente"
+	 */
+	public void printaMatriculaInvalida() {
+		System.out.println("Matricula não cadastrada, tente novamente");
+	}
+	/*
+	 * Printa "Digite a matricula do Funcionario para a operação selecionada"
+	 */
+	public void digiteSuaMAt() {
+		System.out.println("Digite a matricula do Funcionario para a operação selecionada");
+	}
+	
 }
 
