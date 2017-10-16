@@ -7,18 +7,28 @@ import java.util.ArrayList;
 import br.ufsc.ine5605.Tela;
 
 public class TelaTentativaAcesso extends Tela {
-
+	/**
+	* Imprime o motivo do acesso ter sido negado
+	*/
 	public void mostraNegacao(MotivoNegacaoAcesso motivo) {
 		System.out.println(motivo.getNome());
 	}
-
+	/**
+	* Imprime no console as opcoes do menu Tentativas de acesso e recebe a resposta do usuario
+	* @return
+	*	int referente a opcao escolhida pelo usuario
+	*/
 	public int mostraOpcoes() {
 		System.out.println("1- Usar horario e data local");
 		System.out.println("2- Definir horario e data (para testes)");
 		System.out.println("0- Voltar");
 		return super.leInteiroPositivoAte(2);
 	}
-
+	/**
+	 * Solicita a digitacao de uma hora, no formato (hh:mm) ate que seja digitada corretamente
+	 * @return
+	 * 	String correspondente a hora digitada
+	 */
 	public String perguntaHora() {
 		String hora = "";
 		boolean respostaOK = false;
@@ -38,12 +48,20 @@ public class TelaTentativaAcesso extends Tela {
 		
 		return hora;
 	}
-
+	/**
+	 * Solicita a digitacao de uma matricula, ate que seja digitada corretamente
+	 * @return
+	 * 	String correspondente a matricula digitada
+	 */
 	public int perguntaMatricula() {
 		System.out.println("Digite sua matricula:"); 
 		return leInteiroPositivo();
 	}
-
+	/**
+	 * Solicita a digitacao de uma data, no formato (dd/mm/aaaa) ate que seja digitada corretamente
+	 * @return
+	 * 	String correspondente a data digitada
+	 */
 	public String perguntaData() {
 		String data = "";
 		boolean respostaOK = false;
@@ -70,7 +88,13 @@ public class TelaTentativaAcesso extends Tela {
 		
 		return data;
 	}
-	
+	/**
+	* Verifica se a data esta no formato (dd/mm/aaaa)
+	* @param text
+	*	String que sera verificada
+	* @return
+	*	true, se a String estiver no formato correto, ou false, se nao estiver
+	*/
 	private boolean dataEhValida(String text) {
 		   
 	    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -83,12 +107,18 @@ public class TelaTentativaAcesso extends Tela {
 	        return false;
 	    }
 	}
-
+	/**
+	* Imprime mensagem de confirmacao do acesso
+	*/
 	public void confirmaAcesso() {
 		System.out.println("Acesso permitido.");
 		
 	}
-
+	/**
+	* Imprime no console as opcoes do menu de relatorio das tentativas de acesso e recebe a resposta do usuario
+	* @return
+	*	int referente a opcao escolhida pelo usuario
+	*/
 	public int mostraMenuTentativas() {
 		System.out.println("Escolha uma opcao: ");
 		System.out.println(
@@ -105,7 +135,11 @@ public class TelaTentativaAcesso extends Tela {
 
 		return leInteiroPositivoAte(7);
 	}
-
+	/**
+	* Imprime no console os horarios de um ArrayList de tentativas de acesso, ou informa que nao ha tentativas
+	* @param lista
+	*	Lista que sera impressa
+	*/
 	public void listaTentativas(ArrayList<TentativaAcesso> tentativas) {
 		if(tentativas.isEmpty()){
 			System.out.println("Nao ha tentativas de acesso");
@@ -118,7 +152,11 @@ public class TelaTentativaAcesso extends Tela {
 		leitor.nextLine();
 		
 	}
-
+	/**
+	 * Imprime no console uma lista com os motivos de negacao de acesso e recebe do usuario um int referente ao motivo
+	 * @return
+	 * 	int correspondente ao motivo digitado
+	 */
 	public int perguntaMotivo() {
 		int i = 0;
 		for(MotivoNegacaoAcesso m: MotivoNegacaoAcesso.values()) {
